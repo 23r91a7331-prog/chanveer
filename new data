@@ -1,0 +1,26 @@
+import pandas as pd
+
+# Create raw dataset
+data = {
+    "Student_ID": [1, 2, 3, 3, 4],
+    "Attendance": [85, None, 75, 75, 90],
+    "Result": ["Pass", "Pass", "Fail", "Fail", None]
+}
+
+df = pd.DataFrame(data)
+
+print("Raw Data:")
+print(df)
+
+# Remove duplicate rows
+df = df.drop_duplicates()
+
+# Handle missing values
+df["Attendance"] = df["Attendance"].fillna(df["Attendance"].mean())
+df["Result"] = df["Result"].fillna("Pass")
+
+# Encode categorical column
+df["Result"] = df["Result"].map({"Pass": 1, "Fail": 0})
+
+print("\nPreprocessed Data:")
+print(df)
